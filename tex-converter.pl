@@ -57,7 +57,7 @@ sub convert_all_lines {
     my @tex_lines=();
     while (our $line=shift @lines){
         convert_line;
-        unshift @tex_lines,$line;
+        push @tex_lines,$line;
     }
     open(my $wfile,'>',shift);
     while (my $tex_line=shift @tex_lines){

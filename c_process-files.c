@@ -9,6 +9,10 @@
 #define ROOT "perl tex-converter.pl "
 
 int main(int argc, char **argv){
+    if (argv[2] == NULL) {
+        printf("Please input two arguments: the source, then the destination\n");
+        return 0;
+    }
     // Declare the source folder.
     DIR *src_dir=opendir(argv[1]);
     if (src_dir == NULL) {

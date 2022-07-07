@@ -32,6 +32,12 @@ my %pattern_subs=(
     '^"\'|(?<=\s)"\'' => '``\,`',
     '^"|(?<=[^-]\s)"' => '``'
 );
+
+# Error starts here.
+#   "Possible attempt to put comments in qw() list at tex-converter.pl line 52.
+#   Use of uninitialized value in open at tex-converter.pl line 66.
+#   readline() on closed filehandle $rfile at tex-converter.pl line 6."
+
 my @pattern_list=qw(
      $
      <

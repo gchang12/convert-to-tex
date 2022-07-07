@@ -14,14 +14,14 @@ use strict;
 
 my %pattern_subs=(
 # All should be escaped with a few exceptions
-    '\\$' => '\$',
+    '\$' => "\\\$",
 # Less-than and greater-than signs must be converted to $<$ and $>$
-# - Important that this is done AFTER the math-shift characters are proccessed
-    '<' => '$<$',
-    '>' => '$>$',
-    '{' => '\{',
-    '}' => '\}',
+# - Important that this is done AFTER the math-shift and group characters are processed
 # Group-characters must be escaped
+    '{' => '$\{$',
+    '<' => '{}$<${}',
+    '>' => '{}$>${}',
+    '}' => '$\}$',
 # Carets must be converted to \^{}
 # - Must be done AFTER group-characters are processed!
     '\\^' => '\^{}',
@@ -33,24 +33,12 @@ my %pattern_subs=(
     '^"|(?<=[^-]\s)"' => '``'
 );
 
-# Error starts here.
+# Error starts here if I attempt to use qw list to list the order of the patterns
 #   "Possible attempt to put comments in qw() list at tex-converter.pl line 52.
 #   Use of uninitialized value in open at tex-converter.pl line 66.
 #   readline() on closed filehandle $rfile at tex-converter.pl line 6."
 
-my @pattern_list=qw(
-     $
-     <
-     >
-     {
-     }
-     ^
-     &
-     #
-     _
-     ^"'|(?<=\s)"'
-     ^"|(?<=[^-]\s)"
-);
+my @pattern_list=('\$','{','}','<','>','\^','&','#','_','^"\'|(?<=\s)"\'','^"|(?<=[^-]\s)"');
 
 sub convert_line {
     my $tex_sym;

@@ -6,7 +6,7 @@
 #include <sys/stat.h> // To make directories 
 #include <string.h>
 
-#define ROOT "perl tex-converter.pl 2>/dev/null "
+#define ROOT "perl tex-converter.pl "
 
 int main(int argc, char **argv){
     // Declare the source folder.
